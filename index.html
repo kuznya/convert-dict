@@ -1,0 +1,39 @@
+﻿<!doctype html>
+<html>
+<button onclick="convert_req();">code</button>
+<br>
+<br>
+<textarea id="log" rows="10" cols="40"></textarea>
+<script src="data.js"></script>
+<script>
+    const log = document.getElementById('log');
+    let inp, last_inp = '100';
+    
+    function print(s) {
+        log.value = s + '\n' + log.value
+    }
+
+    function process_code(code) {
+        if (Object.keys(data).includes(code)) {
+            return `${code} -> ${data[code]}`;
+        }
+        // else
+        return `no need to change ${code}`;
+    }
+
+    function convert_req() {
+        let result = '';
+        let text = 'enter code to convert';
+        do {
+            const s = `${result}\n${text}`;
+            inp = prompt(s, last_inp);
+            console.log(inp);
+            if (inp === null || !inp.length) break;
+            last_inp = inp;
+            result = process_code(inp.trim());
+            print(result)
+        } while (true);
+    }
+    convert_req();
+</script>
+</html>
