@@ -1,14 +1,17 @@
 ﻿<!doctype html>
 <html>
-<button onclick="convert_req();">code</button>
+<button id="btn" onclick="convert_req();">code</button>
 <br>
 <br>
 <textarea id="log" rows="10" cols="40"></textarea>
 <script src="data.js"></script>
 <script>
     const log = document.getElementById('log');
-    let inp, last_inp = '100';
-    
+    const btn = document.getElementById('btn');
+    const text = 'enter code to convert';
+    let result = '';
+    let last_inp = '100';
+
     function print(s) {
         log.value = s + '\n' + log.value
     }
@@ -18,22 +21,28 @@
             return `${code} -> ${data[code]}`;
         }
         // else
-        return `no need to change ${code}`;
+        return `${code} : no need to change`;
+    }
+
+    function call_req() {
+        btn.click();
+    }
+
+    function set_req() {
+        setTimeout(call_req, 20);
     }
 
     function convert_req() {
-        let result = '';
-        let text = 'enter code to convert';
-        do {
-            const s = `${result}\n${text}`;
-            inp = prompt(s, last_inp);
-            console.log(inp);
-            if (inp === null || !inp.length) break;
-            last_inp = inp;
-            result = process_code(inp.trim());
-            print(result)
-        } while (true);
+        const s = `${result}\n${text}`;
+        const inp = prompt(s, last_inp);
+        // console.log(inp);
+        if (inp === null || !inp.length) return;
+        last_inp = inp;
+        result = process_code(inp.trim());
+        print(result);
+        set_req();
     }
-    convert_req();
+
+    set_req();
 </script>
 </html>
