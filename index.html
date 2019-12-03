@@ -1,13 +1,12 @@
 ﻿<!doctype html>
 <html>
-<button id="btn" onclick="convert_req();">code</button>
+<button onclick="convert_req();">code</button>
 <br>
 <br>
 <textarea id="log" rows="10" cols="40"></textarea>
 <script src="data.js"></script>
 <script>
     const log = document.getElementById('log');
-    const btn = document.getElementById('btn');
     const text = 'enter code to convert';
     let result = '';
     let last_inp = '100';
@@ -25,11 +24,7 @@
     }
 
     function call_req() {
-        btn.click();
-    }
-
-    function set_req() {
-        setTimeout(call_req, 20);
+        setTimeout(convert_req, 50);
     }
 
     function convert_req() {
@@ -40,9 +35,9 @@
         last_inp = inp;
         result = process_code(inp.trim());
         print(result);
-        set_req();
+        call_req();
     }
 
-    set_req();
+    call_req();
 </script>
 </html>
